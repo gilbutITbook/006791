@@ -1,0 +1,32 @@
+repositories {
+    mavenCentral() // Maven Central 리포지토리 사용한다
+}
+
+configurations {
+    antTasks // 앤트 태스크의 의존 관계를 저장하는 컨피겨레이션
+}
+
+dependencies {
+    // Checkstyle 라이브러리 의존 관계 선언
+    antTasks "com.puppycrawl.tools:checkstyle:5.7"
+}
+
+version = "1.1"
+
+ant.importBuild "build.xml"
+
+ant.properties.version = version
+
+task check << {
+    // // 컨피겨레이션에서 checkstyle 태스크 읽기
+    ant.taskdef(resource: "checkstyletask.properties", classpath: configurations.antTasks.asPath)
+
+    ant.checkstyle(config: "checkstyle/checkstyle.xml") { // checkstyle 태스크 설정
+        fileset(dir: ant.properties.src)
+        property(key: "checkstyle.cache.file", file: "checkstyle/cache")
+        formatter(type: "xml", toFile: "checkstyle/checkstyle_errors.xml")
+    }
+}
+
+compile.dependsOn check // compile 전에 check 태스크 실행
+

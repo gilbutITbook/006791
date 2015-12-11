@@ -1,0 +1,19 @@
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  testConf1
+}
+
+dependencies {
+  testConf1 group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0'
+}
+
+task showDeps << {
+  // spock、groovy、junit、hamcrest 경로가 출력된다
+  configurations.testConf1.each {
+    println it.absolutePath
+  }
+}
+

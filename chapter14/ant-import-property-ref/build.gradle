@@ -1,0 +1,24 @@
+version = "1.1"
+
+ant.importBuild "build.xml"
+
+ant.properties.version = version // build.xml의 version 속성 덮어쓰기
+
+task war(type: War, dependsOn: "jar") { // build.xml의 jar 타깃 참조
+    description = "war 파일을 작성"
+
+    baseName = "ant-sample" // war 파일의 이름
+    version = project.version // 파일명에 추가되는 버전
+
+    destinationDir = file("dist")// war 파일 출력 위치
+
+    // war 구성
+    from("web") {
+        include("index.html")
+    }
+    // build.xml의 속성 참조
+    classpath("${ant.properties.dist}/lib/${ant.project.name}-${version}.jar")
+    webInf {
+        from ("web/WEB-INF")
+    }
+}

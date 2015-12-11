@@ -1,0 +1,15 @@
+// 리스트1
+configurations {
+  conf1
+}
+
+dependencies {
+  conf1 files("libs/sample-lib.jar")
+}
+
+task showDeps << {
+  configurations.conf1.each {
+    println it.absolutePath
+  }
+}
+

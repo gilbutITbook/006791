@@ -1,0 +1,19 @@
+apply plugin: "java"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile('org.codehaus.groovy:groovy-all:2.0.4') {
+      // force = true
+  }
+  testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+}
+
+task showDeps << {
+  configurations.testCompile.each {
+    println it.absolutePath
+  }
+}
+

@@ -1,0 +1,20 @@
+apply plugin: "application"
+mainClassName = "com.example.Client"
+
+apply plugin: "java"
+
+repositories {
+  // com.example:my-bintray-module:0.1의 의존 라이브러리 취득 위치
+  jcenter()
+
+  // com.example:my-bintray-module:0.1을 취득하는 위치
+  maven {
+    // http://dl.bintray.com/<계정명>/<리포지토리명>
+    url "http://dl.bintray.com/gradle-book/test1"
+  }
+}
+
+dependencies {
+  compile "com.example:my-bintray-module:0.1"
+}
+

@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.slf4j:slf4j-api:1.7.7'
+	testCompile 'junit:junit:4.11'
+	runtime 'ch.qos.logback:logback-classic:1.1.2'
+}
+
+test {
+    filter {
+        includeTestsMatching '*succeed*'
+    }
+    testLogging {
+        showStandardStreams = true
+        events 'started', 'skipped', 'failed'
+        displayGranularity = 1
+    }
+}

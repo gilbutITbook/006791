@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile "junit:junit:4.11"
+}
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+//tasks.withType(JavaCompile) {
+//  options.encoding = defaultEncoding
+//}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+javadoc {
+  options.links << 'http://docs.oracle.com/javase/jp/7/api/'
+}

@@ -1,0 +1,2 @@
+file('f1.txt').write('あああああ')
+file('f2.txt').write('あああああ', 'UTF-8')

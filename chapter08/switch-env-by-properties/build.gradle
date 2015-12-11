@@ -1,0 +1,6 @@
+// load from properties file.
+task showURL << {
+  def props = new Properties()
+  props.load(new FileInputStream("environments/${env}/env.properties"))
+  println "App Server: ${props.app_url}"
+}

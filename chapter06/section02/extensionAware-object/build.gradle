@@ -1,0 +1,33 @@
+class MutableObject {
+	private String property
+
+	String getProperty() { return property; }
+
+	void setProperty(String property) {
+	    this.property = property
+	}
+}
+
+project.extensions.create('mutable', MutableObject)
+project.mutable.property = 'MutableObjectです。'
+
+task showMutableObject << {
+    println project.mutable.property
+}
+
+
+class ImmutableObject {
+	private String property
+
+	ImmutableObject(String property) {
+	    this.property = property
+	}
+
+	String getProperty() { return property; }
+}
+
+extensions.create('imutable', ImmutableObject, 'ImmutableObjectです。')
+
+task showImmutableObject << {
+	println imutable.property
+}

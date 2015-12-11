@@ -1,0 +1,6 @@
+apply from: "https://gist.githubusercontent.com/literalice/639c845fe7ea4b7b6ce0/raw/1c254a53460a0afa3fd64b98662d8eb74a93cf2d/gistfile1.groovy"
+
+task run(dependsOn: "externalTask") << {
+  println "task execution is complete."
+}
+

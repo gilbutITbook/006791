@@ -1,0 +1,14 @@
+final docTheme = "BLUE"
+
+task docsZip(type: Zip) {
+  into("userguide") {
+    from("docs") {
+      include "**/*.html", "**/*.css"
+      rename { originalName ->
+        if (originalName == "release-note.html")
+            return "release-note-${new Date().format('yyyyMMddHHmm')}.html"
+      }
+      rename(/THEME_${docTheme}-(.*\.css)/, '$1')
+    }
+  }
+}

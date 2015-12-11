@@ -1,0 +1,33 @@
+task docsZip(type: Zip) {
+  // 압축한 것을 docs-1 디렉터리에 추가한다
+  into "docs-1"
+  // base.css를 압축 대상으로 한다
+  include "**/base.css"
+  // 빈 디렉터리는 제외한다
+  includeEmptyDirs = false
+
+  // 압축한 것을 release-note 디렉터리에 추가한다
+  into("release-notes") {
+    // docs 디렉터리로부터
+    from "docs"
+    // release-note.html를 압축한다
+    include "release-note.html"
+  }
+
+  // 압축한 것을 userguide 디렉터리에 추가
+  into("userguide") {
+    // docs 디렉터리의
+    from("docs") {
+      // HTML 파일을 압축한다
+      include "**/*.html"
+      // 단, 출시 안내서는 이 디렉터리에 포함하지 않는다
+      exclude "release-note.html"
+    }
+    // sample 디렉터리의
+    from("sample") {
+      // Java 파일을 압축한다
+      include "**/*.java"
+    }
+  }
+}
+

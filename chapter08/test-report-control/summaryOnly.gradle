@@ -1,0 +1,59 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.7'
+    testCompile 'junit:junit:4.11'
+    runtime 'ch.qos.logback:logback-classic:1.1.2'
+}
+
+sourceSets {
+    sub {
+        java.srcDir file('src/sub/java')
+        compileClasspath = configurations.compile
+    }
+    subTest {
+        java.srcDir file('src/subTest/java')
+        compileClasspath = sourceSets.sub.output + configurations.testCompile
+        runtimeClasspath = output + compileClasspath + configurations.testRuntime
+    }
+}
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava, compileSubJava, compileSubTestJava]*.options*.encoding = defaultEncoding
+
+test {
+    description = 'src/main/javaに対するテストを実行します'
+
+    reports.html.enabled = false
+	
+    /* 出力先の指定が残っていても問題ないが、不要なので削除しておく */
+    reports.junitXml.destination = file("$reports.junitXml.destination/unit-main")
+}
+
+task subTest(type: Test) {
+    description = 'src/sub/javaに対するテストを実行します'
+    group = 'verification'
+    
+    testClassesDir = sourceSets.subTest.output.classesDir
+    classpath = sourceSets.subTest.runtimeClasspath
+
+    reports.html.enabled = false
+
+    /* 出力先の指定が残っていても問題ないが、不要なので削除しておく */
+    reports.junitXml.destination = file("$reports.junitXml.destination/unit-sub")
+}
+
+task summaryTestReports(type: TestReport, dependsOn: [test, subTest]) {
+    destinationDir = file("$buildDir/reports/tests/unit-summary")
+    reportOn test, subTest
+}
+
+check.dependsOn summaryTestReports

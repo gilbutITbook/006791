@@ -1,0 +1,6 @@
+task myTask << {
+    println name
+}
+
+myTask.group 'help'
+myTask.description 'myTask입니다.'

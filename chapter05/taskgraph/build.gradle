@@ -1,0 +1,12 @@
+tasks.whenTaskAdded { task ->
+    println task.name
+}
+
+task todo << { println 'execute task: ' + name }
+
+task doing << { println 'execute task: ' + name }
+
+task done << { println 'execute task: ' + name }
+
+doing.dependsOn todo
+done.dependsOn doing

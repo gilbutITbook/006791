@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd">
+
+    <import resource="classpath:spring/ac-datasource.xml" />
+    <import resource="classpath:spring/ac-domain.xml" />
+    <import resource="classpath:spring/ac-service.xml" />
+    
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:h2db/DDL.sql" encoding="UTF-8" execution="INIT" />
+        <jdbc:script location="classpath:h2db/DML.sql" encoding="UTF-8" execution="INIT" />
+    </jdbc:initialize-database>
+</beans>

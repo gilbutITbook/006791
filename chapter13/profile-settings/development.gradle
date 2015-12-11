@@ -1,0 +1,5 @@
+// development.gradle
+ext {
+    serverUrl = "localhost"
+}
+

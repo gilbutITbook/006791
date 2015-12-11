@@ -1,0 +1,14 @@
+FileCollection collections = files('file1.txt', 'file2.txt')
+
+// 異なる型をまとめて渡してファイルコレクションとする
+collections = files('file1.txt', new File('file2.txt'), new URL('file:/index.html'))
+
+println collections
+
+List fileList = [new File('file1.txt'), new File('file2.txt')]
+// List型で渡す
+collections = files(fileList)
+// 配列で渡す
+collections = files(fileList as File[])
+
+println collections

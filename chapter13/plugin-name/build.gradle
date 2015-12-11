@@ -1,0 +1,5 @@
+apply plugin: "greeting" // 사용자 정의 플러그인 적용
+
+greeting { // GreetingPlugin에 의해 추가된 greeting 블록
+  message("Hi", "world")
+}

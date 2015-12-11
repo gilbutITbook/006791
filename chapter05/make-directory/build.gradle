@@ -1,0 +1,3 @@
+mkdir 'parent/child/grandchild'
+mkdir '../outOfTheProject'
+mkdir '/gradle-book/absolutePathDir'

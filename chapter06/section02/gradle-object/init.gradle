@@ -1,0 +1,10 @@
+class MyTaskActionListener implements TaskActionListener {
+    void beforeActions(Task task) {
+        println '-- ' + task.name + '태스크 액션 실행 전 --'
+    }
+    void afterActions(Task task) {
+        println '-- ' + task.name + '태스크 액션 실행 후 --'
+    }	
+}
+
+//gradle.addListener(new MyTaskActionListener())

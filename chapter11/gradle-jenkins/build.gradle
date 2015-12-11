@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'jacoco'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile 'junit:junit:4.11'
+}
+
+archivesBaseName = 'gradle-jenkins-sample'
+
+[checkstyle, findbugs]*.ignoreFailures = true
+
+findbugs {
+  // JDK8를 사용하는 경우 FindBugs2.x가 동작하지 않기 때문에
+  // 명시적으로 FindBugs3.0.0을 지정해두도록 한다
+  toolVersion = '3.0.0'
+}
+
+task checkstyleTest(overwrite: true) << {}
+task findbugsTest(overwrite: true) << {}

@@ -1,0 +1,17 @@
+version = 1.0
+
+task sourcesJar(type: Jar) {
+  // 태스크 설정(jar 파일 생성 위치 등)
+  baseName = "my-library"
+  appendix = "sources"
+  destinationDir = file("build")
+
+  // 압축 구성
+  from("src/main/java") {
+    include "**/*.java", "**/*.groovy", "**/*.xml"
+  }
+  // 매니페스트 설정
+  manifest {
+    attributes("Built-By": "Gradle", "Implementation-Version": project.version)
+  }
+}

@@ -1,0 +1,29 @@
+apply plugin: GreetingPlugin // 사용자 정의 플러그인 적용
+
+greeting { // GreetingPlugin에 의해 추가된 greeting 블록
+  message("Hi", "world")
+}
+
+ // Plugin을 implement한 사용자 정의 플러그인 클래스
+class GreetingPlugin implements Plugin<Project> {
+   // 이 플러그인이 적용될 때 호출되는 메서드
+  void apply(Project project) {
+    // 프로젝트에 greeting extension 추가
+    project.extensions.create("greeting", GreetingExtension)
+    // 프로젝트에 'greet' 태스크 추가
+    project.task("greet") << {
+      println "${project.greeting.greeting}, ${project.greeting.target}!"
+    }
+  }
+}
+
+// greeting extension을 표현하는 클래스
+class GreetingExtension {
+  String greeting
+  String target
+  void message(greeting, target) {
+    this.greeting = greeting
+    this.target = target
+  }
+}
+

@@ -1,0 +1,7 @@
+ConfigurableFileCollection collections1 = files('file1.txt')
+
+FileCollection collections2 = collections1 + files('file2.txt')
+assert collections2.files.size() == 2
+
+collections1 == collections2 - files('file2.txt')
+assert collections1.files.size() == 1

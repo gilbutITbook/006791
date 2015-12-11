@@ -1,0 +1,34 @@
+// (1) Tomcat 플러그인 이용을 위한 설정
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.bmuschko:gradle-tomcat-plugin:2.0'
+  }
+}
+
+//apply plugin: 'java'
+// (2) War 플러그인 적용
+apply plugin: 'war'
+// (3) Tomcat 플러그인 적용
+apply plugin: 'com.bmuschko.tomcat'
+
+repositories {
+  mavenCentral()
+}
+	
+dependencies {
+  // (4) 의존 관계에 Java EE 6의 API추가
+  providedCompile 'javax:javaee-web-api:6.0'
+  compile 'org.slf4j:slf4j-api:1.7.5'
+  testCompile 'junit:junit:4.11'
+
+  // (5) Tomcat 실행에 필요한 의존 라이브러리 설정
+  def tomcatVersion = '7.0.52'
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
+           "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+      exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+  }
+}

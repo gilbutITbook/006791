@@ -1,0 +1,55 @@
+buildscript {
+  repositories {
+    jcenter()
+ }
+ dependencies {
+   // bintray 플러그인을 사용할 수 있게 한다
+   classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5"
+ }
+}
+
+apply plugin: "com.jfrog.bintray" // bintray 플러그인 적용
+
+apply plugin: "java"
+apply plugin: "maven-publish"
+
+group = "com.example"
+version = 0.1
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  compile "org.apache.commons:commons-lang3:3.3.1"
+}
+
+task sourceJar(type: Jar) {
+  from sourceSets.main.allJava // 소스 세트를 입력 파일로 설정
+}
+
+publishing {
+  publications {
+    mod1(MavenPublication) { // 모듈 정의 
+      artifactId "my-bintray-module"
+
+      from components.java // 소프트웨어 컴포넌트 'java'를 공개 대상으로 지정
+      // artifact() 메서드로 공개할 압축 파일이나 파일을 지정
+      artifact sourceJar {
+        classifier "sources"
+      }
+    }
+  }
+}
+
+bintray {
+  user = project.has("bintrayUser") ? bintrayUser : "" // Bintray アカウント名
+  key = project.has("bintrayKey") ? bintrayKey : "" // Bintray APIキー
+  publications = ["mod1"] // Bintray에 업로드하는 모듈
+  publish = true
+  pkg {  // 업로드 위치의 Bintray 패키지 정보
+    repo = "test1"
+    name = "my-pkg"
+  }
+}
+

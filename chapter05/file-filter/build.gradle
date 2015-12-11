@@ -1,0 +1,11 @@
+String targetName = 'ConcreteVo'
+copy {
+    from 'template'
+	into 'output'
+	filter { line ->
+	    line.replaceAll 'VALUE_OBJECT_NAME', "${targetName}"
+	    line.replaceAll 'AUTHOR_NAME', 'Gradle2.0 빌드 스크립트'
+	}
+	filter org.apache.tools.ant.filters.TabsToSpaces, tablength: 4
+	rename 'template.java', "${targetName}.java"
+}

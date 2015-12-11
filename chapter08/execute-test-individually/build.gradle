@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+ext.omitDatasource = false
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+}
+
+task slowTestOnly(type: Test) {
+	filter {
+		includeTestsMatching 'com.example.*.*Slowly'
+	}
+}
+
+task testExecutionWithoutSlowTest(type: Test) {
+	useJUnit {
+	    excludeCategories 'com.example.suite.categories.SlowTests'
+	}
+}

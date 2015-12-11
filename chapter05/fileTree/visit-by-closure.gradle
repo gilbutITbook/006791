@@ -1,0 +1,9 @@
+FileTree tree = fileTree('src')
+tree.visit { fileDetails ->
+    println 'name: ' + fileDetails.getName()
+    if(fileDetails.isDirectory()) {
+      println 'path: ' + fileDetails.getPath()
+    } else {
+      println 'file size: ' + fileDetails.getSize()
+    }
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{title.application} + ' | ' + #{title.list}">Example Application | Book List</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    
+    <div th:unless="${#lists.isEmpty(bookList)}">
+      <h2 th:text="#{header.list}">List of Books</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th th:text="#{book.id}">ID</th>
+            <th th:text="#{book.title}">Title</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="b : ${bookList}">
+            <td ><a th:href="@{${b.id}}" th:text="#{link.toDetail}">show info</a></td>
+            <td th:text="${b.title}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <div>
+      <a th:href="@{createView}" th:text="#{link.toCreate}">Register new Book</a>
+    </div>
+  </body>
+</html>

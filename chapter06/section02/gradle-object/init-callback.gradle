@@ -1,0 +1,24 @@
+// gradle 을 생략
+settingsEvaluated {
+    println '1. settingsEvaluated'
+}
+
+projectsLoaded {
+    println '2. projectsLoaded'
+}
+
+beforeProject {
+    println '3. beforeProject'
+}
+
+afterProject {
+    println '4. afterProject'    
+}
+
+projectsEvaluated {
+    println '5. projectsEvaluated'
+}
+
+buildFinished {
+    println '6. buildFinished'    
+}

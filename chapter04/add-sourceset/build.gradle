@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+sourceSets {
+  integrationTest {
+    compileClasspath = sourceSets.main.output + configurations.testCompile
+    runtimeClasspath = output + compileClasspath + configurations.testCompile
+  }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  testCompile "junit:junit:4.11"
+  integrationTestCompile  "junit:junit:4.11"
+  integrationTestRuntime  "junit:junit:4.11"
+}
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+task integrationTest(type: Test) {
+  testClassesDir = sourceSets.integrationTest.output.classesDir
+  classpath = sourceSets.integrationTest.runtimeClasspath
+}

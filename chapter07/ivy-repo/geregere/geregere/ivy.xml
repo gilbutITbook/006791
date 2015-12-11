@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="geregere" module="geregere" revision="0.1" />
+  <configurations>
+    <conf name="conf1" visibility="public"/>
+    <conf name="conf2" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="geregere" type="jar" conf="conf1" ext="jar"/>
+  </publications>
+  <dependencies>
+    <dependency org="com.example" name="aaa" rev="0.1" conf="conf1->compile(*)"/>
+    <dependency org="com.example" name="bbb" rev="0.1" conf="conf2->compile(*)"/>
+  </dependencies>
+</ivy-module>

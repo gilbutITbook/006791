@@ -1,0 +1,11 @@
+task docsZip(type: Zip) {
+  // docs 디렉터리에서 압축에 포함할 파일을 가져온다
+  from "docs"
+  // 압축할 파일은 CSS 파일과 HTML 파일
+  include "**/*.css", "**/*.html"
+  // docs/single.html는 포함하지 않는다
+  exclude "single.html"
+  // 빈 디렉터리는 포함하지 않는다
+  includeEmptyDirs = false
+}
+

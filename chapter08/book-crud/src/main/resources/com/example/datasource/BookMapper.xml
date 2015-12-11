@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.datasource.BookMapper">
+
+ 	<resultMap id="book" type="book" >
+        <constructor>
+            <idArg column="id" javaType="long"></idArg>
+            <arg column="title" javaType="String"></arg>
+            <arg column="isbn" javaType="String"></arg>
+        </constructor>
+	</resultMap>
+	
+	<select id="findAll" resultType="book">
+	    SELECT 
+	        b.id as id, b.title as title, b.isbn as isbn
+	    FROM
+	        book b
+	    ORDER BY
+	        b.id
+	</select>
+	
+	<select id="findById" resultMap="book">
+	    SELECT 
+	        b.id as id, b.title as title, b.isbn as isbn
+	    FROM
+	        book b
+	    WHERE
+	        b.id = #{id}
+	</select>
+ 	
+	<insert id="register">
+	    INSERT INTO book(title, isbn) VALUES (#{title}, #{isbn})
+	</insert>
+
+	<update id="update">
+	    UPDATE book SET title = #{title} WHERE id = #{id}
+	</update>
+	
+	<delete id="delete">
+	    DELETE FROM book WHERE id = #{id}
+	</delete>
+
+</mapper>

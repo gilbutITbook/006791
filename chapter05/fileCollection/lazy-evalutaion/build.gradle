@@ -1,0 +1,16 @@
+import java.util.concurrent.Callable
+
+FileCollection orgCollection = null
+FileCollection newCollection = files( new Callable<List<File>>() {
+    List<File> call() {
+        println '-- callable#call --'
+        orgCollection as List
+    }
+})
+println '-- before set file --'
+
+orgCollection = files('internal')
+
+println '-- after set file --'
+
+println newCollection.singleFile

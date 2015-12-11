@@ -1,0 +1,104 @@
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:0.5'
+  }
+}
+
+import groovyx.net.http.HTTPBuilder
+import static groovyx.net.http.ContentType.*
+import static groovyx.net.http.Method.*
+
+version = "0.1"
+group = "com.example.gradle.maven"
+
+apply plugin: "java"
+apply plugin: 'maven-publish'
+apply plugin: "com.jfrog.bintray"
+
+task sourcesJar(type: Jar) { // 코드의 JAR 작성 태스크
+  from sourceSets.main.allJava // 소스 세트를 입력 파일로 설정
+}
+  classifier = "sources"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) { // Javadoc JAR의 작성 태스크
+  classifier 'javadoc'
+  from javadoc.destinationDir // Javadoc의 대상 디렉터리를 입력 파일로 지정
+}
+
+jar.dependsOn sourcesJar, javadocJar // jar 태스크 실행 시에 코드 JAR와 Javadoc JAR도 작성한다
+
+// Bintray의 REST API를 이용해서 업로드한 모듈에 서명하는 태스크
+task signBintrayPackage << {
+  final http = new HTTPBuilder(bintray.apiUrl) // 「bintray」는 빈트레이 플러그인에 의해 설정되는 속성
+
+  // BASIC 인증
+  http.auth.basic bintrayUser, bintrayKey
+
+  // Bintray의 REST API 요청
+  http.request(POST, JSON) {
+    uri.path = "/gpg/${bintrayUser}/${bintray.pkg.repo}/${bintray.pkg.name}/versions/${project.version}"
+    body = [passphrase: signKeyPassphrase]
+    response.success = { resp ->
+      logger.info("Signed version ${project.version}.")
+    }
+    response.failure = { resp ->
+      throw new GradleException("Could not sign version ${project.version}: $resp.statusLine")
+    }
+  }
+}
+
+publishing {
+  publications {
+    mod1(MavenPublication) {
+      from components.java
+      artifact sourcesJar // 코드 JAR를 모듈에 포함한다
+      artifact javadocJar // Javadoc JAR를 모듈에 포함한다
+
+      final customPom = { // Maven Central 리포지토리가 요구하는 POM
+        packaging "jar"
+        name "Gradle XXX Plugin"
+        url "https://example.com/module-site/xxx"
+        description "This is a sample module for mvn central."
+        licenses {
+          license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+          }
+        }
+        scm {
+          url "https://github.com/xxx/xxx"
+          connection "https://github.com/xxx/xxx"
+        }
+        developers {
+          developer {
+            id "my-name-id"
+            name "Taro Gradle"
+            email "xxx@example.com"
+          }
+        }
+      }
+      customPom.resolveStrategy = Closure.DELEGATE_FIRST
+
+      pom.withXml { xml ->
+        final root = xml.asNode()
+        root.children().last() + customPom
+      }
+    }
+  }
+}
+
+bintray {
+  user = bintrayUser
+  key = bintrayKey
+  publications = ["mod1"]
+  pkg {
+    repo = "test1"
+    name = "my-pkg-2"
+  }
+}
+

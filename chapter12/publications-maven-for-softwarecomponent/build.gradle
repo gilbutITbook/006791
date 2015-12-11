@@ -1,0 +1,22 @@
+apply plugin: "java"
+apply plugin: "maven-publish" // Ivy 리포지토리에 공개하는 경우는 ivy-publish를 적용
+
+group = "com.example"
+version = 0.1
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  runtime "org.apache.commons:commons-lang3:3.3.1"
+}
+
+publishing { // 공개 설정
+  publications {
+    mod1(MavenPublication) { // <mod1>는 임의의 모듈 식별명. 아이비의 경우는 IvyPublication
+      from components.java // 소프트웨어 컴포넌트 'java'를 모듈에 등록
+    }
+  }
+}
+

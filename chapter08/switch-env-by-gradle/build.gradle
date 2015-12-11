@@ -1,0 +1,5 @@
+apply from: "environments/${env}/env.gradle"
+
+task showURL << {
+  println "App Server: ${app_url}"
+}

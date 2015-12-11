@@ -1,0 +1,37 @@
+apply plugin: 'java'
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+def defaultEncoding = 'UTF-8'
+[compileJava, compileTestJava]*.options*.encoding = defaultEncoding
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.11'
+	testCompile 'org.mockito:mockito-core:1.9.5'
+}
+
+test {
+	include '**/UnitTestSuite.class'
+
+    reports.html.destination = file("${reports.html.destination}/unit")
+    reports.junitXml.destination = file("${reports.junitXml.destination}/unit")
+}
+
+task integrationTest(type: Test) {
+	include '**/IntegrationTestSuite.class'
+
+    reports.html.destination = file("${reports.html.destination}/integration")
+    reports.junitXml.destination = file("${reports.junitXml.destination}/integration")
+}
+
+task smokeTest(type: Test) {
+	include '**/SmokeTestSuite.class'
+
+    reports.html.destination = file("${reports.html.destination}/smoke")
+    reports.junitXml.destination = file("${reports.junitXml.destination}/smoke")
+}

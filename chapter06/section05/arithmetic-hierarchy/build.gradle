@@ -1,0 +1,35 @@
+// 공통 설정
+subprojects {
+    apply plugin: 'java'
+  
+    def defaultEncoding = 'UTF-8'
+    compileJava.options.encoding = defaultEncoding
+  
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+  
+    javadoc {
+      options.links << 'http://docs.oracle.com/javase/jp/7/api/'
+    }
+}
+  
+  
+// 라이브러리 프로젝트
+project('arithmetic-lib') {}
+  
+  
+// 애플리케이션 프로젝트
+project('arithmetic-main') {
+    apply plugin: 'application'
+  
+    mainClassName = 'com.example.cli.SimpleCalc'
+    applicationName = 'SimpleCalc'
+  
+    dependencies {
+      compile project(':arithmetic-lib')
+    }
+  
+    run {
+      standardInput = System.in
+    }
+}

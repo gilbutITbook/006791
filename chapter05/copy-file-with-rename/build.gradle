@@ -1,0 +1,10 @@
+copy {
+	from 'original'
+	into 'replication'
+	rename { fileName ->
+	    if(fileName == 'dummy.txt') {
+	        fileName.replace('dummy','renamed-file')
+	    }
+	}
+	rename '(.*)-template.txt', '$1.txt'
+}

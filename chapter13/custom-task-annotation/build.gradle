@@ -1,0 +1,13 @@
+task myTask(type: MyTask) { // 스크립트 평가 단계(Task 객체 작성 시)에 실행
+  target = "world"
+}
+
+class MyTask extends DefaultTask {
+  String target
+
+  @TaskAction
+  void greet() {
+    println "Hello, $target!" // 스크립트 실행 단계에 실행
+  }
+}
+

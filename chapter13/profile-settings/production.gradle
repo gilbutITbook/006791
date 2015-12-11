@@ -1,0 +1,5 @@
+// production.gradle
+ext {
+    serverUrl = "www.example.com"
+}
+

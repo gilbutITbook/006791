@@ -1,0 +1,23 @@
+task normalTask << {
+    println name
+}
+
+task finalizerTask << {
+    println name
+}
+
+task problemTask << {
+    throw new Exception('exception')
+}
+  
+task executionTask << { println name }
+
+normalTask.finalizedBy finalizerTask
+
+// finalizerTask가 실행된다
+//problemTask.dependsOn normalTask
+//executionTask.dependsOn problemTask
+
+// finalizerTask가 실행되지 않는다
+normalTask.dependsOn problemTask
+executionTask.dependsOn normalTask

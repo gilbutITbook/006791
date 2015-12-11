@@ -1,0 +1,10 @@
+String targetName = 'SimpleBean'
+copy {
+    from 'template'
+	into 'output'
+	
+	expand packageName:'com.example.bean', className:targetName, 
+	      fields:['String':'name', 'int':'value']
+
+	rename 'template.java', "${targetName}.java"
+}

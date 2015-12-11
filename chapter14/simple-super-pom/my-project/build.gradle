@@ -1,0 +1,18 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.example'
+version = '2.0'
+
+description = """"""
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.3' // 부모 POM의 속성을 사용한 의존 관계
+    testCompile group: 'junit', name: 'junit', version:'4.0' // 부모 POM의 의존 관계
+}

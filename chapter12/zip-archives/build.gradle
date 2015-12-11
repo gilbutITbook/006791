@@ -1,0 +1,17 @@
+task docsZip(type: Zip) {
+  // 태스크 설정(zip 파일 생성 위치, 압축 레벨 등)
+  baseName = "project-docs"
+  entryCompression = ZipEntryCompression.STORED
+
+  // 압축 구성
+  // 'docs'에 'src/dist' 디렉터리와 embedded.zip의 html, css, js 파일을 모두 추가
+  into ("docs") {
+    from (zipTree("src/dist/embedded.zip")) {
+      include "**/*.html", "**/*.css", "**/*.js"
+    }
+    from ("src/dist") {
+      include "**/*.html", "**/*.css", "**/*.js"
+    }
+  }
+}
+

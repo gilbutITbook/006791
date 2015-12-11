@@ -1,0 +1,17 @@
+version = 1.0
+
+task docsZip(type: Zip) {
+  from 'docs'
+  into 'userguide'
+  include '**/*.html', '**/*.css'
+
+  final date = new Date()
+  filter { line ->
+    line.replaceAll(/@date@/, date.format('yyyyMMddHHmm'))
+  }
+
+  filter org.apache.tools.ant.filters.TabsToSpaces, tablength: 4
+
+  expand version: project.version
+}
+

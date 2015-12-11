@@ -1,0 +1,12 @@
+include 'presentation-project', 'application-project', 'domain-project', 'infrastructure-project'
+
+rootProject.children.each { project ->
+    def layerName = project.name.replaceAll('-project', '')
+    def buildScriptFile = "${layerName}.gradle"
+    project.buildFileName = buildScriptFile
+
+    println "프로젝트/빌드 스크립트명:: ${project.name}／${buildScriptFile}"
+}
+
+println findProject(':invalid-path')
+println project(':invalid-path')

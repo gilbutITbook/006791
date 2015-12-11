@@ -1,0 +1,8 @@
+task docsZip(type: Zip) {
+  // <프로젝트 디렉터리/project.zip로 생성
+  baseName = "project"
+  from ("src/dist") {
+    include "**/*.html", "**/*.css", "**/*.js"
+  }
+}
+

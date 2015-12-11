@@ -1,0 +1,14 @@
+FileCollection collections = files('file1.txt', 'file2.txt', 'file3.txt')
+
+// as 연산자를 이용한 변환
+List list = collections as List
+Set set1 = collections as Set
+File[] array = collections as File[]
+
+// getFiles()의 Groovy 간략 기법
+Set set2 = collections.files
+
+println list
+println set1
+println array
+println set2

@@ -1,0 +1,9 @@
+copy {
+	from 'original'
+	into 'replication'
+
+	include 'example.foo', 'example?.bar', '**/*.txt', 'internal/'
+	includeEmptyDirs = false
+	
+	exclude '**/dummy.txt'
+}

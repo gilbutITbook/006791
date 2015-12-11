@@ -1,0 +1,20 @@
+println '기본 의존 관계：'
+repositories.each { println it.name }
+
+// Gradle DSL
+/*
+repositories {
+    mavenCentral()
+}
+*/
+
+// Groovy 형식
+//def closure = { mavenCentral() }
+//this.repositories(closure)
+
+// Gradle Domain Object
+RepositoryHandler repos = this.getRepositories()
+repos.mavenCentral()
+
+println 'Maven Central 리포지토리 추가 후：'
+repositories.each { println it.name }

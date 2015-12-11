@@ -1,0 +1,18 @@
+// 리스트1
+configurations {
+  conf1
+}
+
+dependencies {
+  conf1 fileTree(dir: "libs", include: "**/*.jar")
+}
+
+task showDeps << {
+  configurations.conf1.each {
+    println it.absolutePath
+  }
+  //출력
+  // /xxx/xx/libs/sample-lib.jar
+  // /xxx/xx/libs/lib-a/sample-a-lib.jar
+}
+

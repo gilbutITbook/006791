@@ -1,0 +1,11 @@
+task docsZip(type: Zip) {
+  // <프로젝트 디렉터리>/build/project-docs.zip로 생성
+  destinationDir = file("build")
+  archiveName = "project-docs.zip"
+  appendix = "docs"
+  classifier = "jdk15"
+
+  from ("src/dist") {
+    include "**/*.html", "**/*.css", "**/*.js"
+  }
+}

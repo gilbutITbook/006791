@@ -1,0 +1,16 @@
+apply plugin: "maven-publish" // Maven Publish 플러그인 적용
+
+group = "com.example"
+version = 0.1
+
+publishing {
+  publications {
+    docs(MavenPublication) {
+      artifactId 'project-docs-list'  // 미설정인 경우는 project.name 이 사용된다
+      artifact('my-docs-index.htm') { // artifact() 메서드로 파일을 직접 아티팩트로 설정
+        extension 'html'
+      }
+    }
+  }
+}
+

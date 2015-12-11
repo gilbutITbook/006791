@@ -1,0 +1,19 @@
+// 생성되는 build.gradle
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.example' // <- pom.xml의 groupId 요소로부터
+version = '1.0-SNAPSHOT' // <- pom.xml의 version 요소로부터
+
+description = """My sample maven project""" // <- pom.xml의 name 요소로부터
+
+sourceCompatibility = 1.5
+targetCompatibility = 1.5
+
+repositories {
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version:'3.8.1'
+}

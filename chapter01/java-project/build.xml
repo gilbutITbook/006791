@@ -1,0 +1,66 @@
+<project name="java-project" basedir=".">
+
+  <property name="build.dir"        value="build"/>
+  <property name="main.src.dir"     value="src/main/java"/>
+  <property name="main.classes.dir" value="${build.dir}/classes/main"/>
+  <property name="test.src.dir"     value="src/test/java"/>
+  <property name="test.classes.dir" value="${build.dir}/classes/test"/>
+  <property name="test.results.dir" value="${build.dir}/test-results"/>
+  <property name="reports.dir"      value="${build.dir}/reports/tests"/>
+  <property name="jar.dir"          value="${build.dir}/lib"/>
+  <path id="junit">
+    <pathelement location="lib/junit-4.11.jar"/>
+    <pathelement location="lib/hamcrest-core-1.3.jar"/>
+  </path>
+
+  <target name="clean">
+    <delete dir="${build.dir}"/>
+  </target>
+
+  <target name="compile">
+    <mkdir dir="${main.classes.dir}"/>
+    <javac srcdir="${main.src.dir}" destdir="${main.classes.dir}"
+           includeantruntime="false"/>
+  </target>
+
+  <target name="jar" depends="compile">
+    <mkdir dir="${jar.dir}"/>
+    <jar destfile="${jar.dir}/${ant.project.name}.jar"
+         basedir="${main.classes.dir}"/>
+  </target>
+
+  <target name="testCompile">
+    <mkdir dir="${test.classes.dir}"/>
+    <javac srcdir="${test.src.dir}" destdir="${test.classes.dir}"
+           includeantruntime="false">
+      <classpath>
+        <path refid="junit"/>
+        <path location="${jar.dir}/${ant.project.name}.jar"/>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="junit" depends="jar,testCompile">
+    <mkdir dir="${test.results.dir}"/>
+    <junit printsummary="yes">
+      <classpath>
+        <path refid="junit"/>
+        <path location="${jar.dir}/${ant.project.name}.jar"/>
+        <path location="${test.classes.dir}"/>
+      </classpath>
+      <formatter type="xml"/>
+      <batchtest todir="${test.results.dir}">
+        <fileset dir="${test.classes.dir}"/>
+      </batchtest>
+    </junit>
+  </target>
+
+  <target name="junitreport" depends="junit">
+    <mkdir dir="${reports.dir}"/>
+    <junitreport todir="${reports.dir}">
+      <fileset dir="${test.results.dir}" includes="TEST-*.xml"/>
+      <report todir="${reports.dir}"/>
+    </junitreport>
+  </target>
+
+</project>

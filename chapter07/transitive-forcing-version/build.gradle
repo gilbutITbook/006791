@@ -1,0 +1,30 @@
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  conf1
+  testConf1.extendsFrom conf1 // testConf1는 conf의 의존 관계도 포함
+}
+
+configurations.testConf1 { // 컨피겨레이션 testConf1 설정
+  resolutionStrategy {
+    failOnVersionConflict()  // Fail 전략 도입
+    force 'org.hamcrest:hamcrest-core:1.3' // testConf1에서 Hamcrest가 요구되면 반드시 버전 1.3을 사용한다
+  }
+}
+
+dependencies {
+  conf1(group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.1') {
+    force = true // 버전이 경합하면 반드시 의존 관계를 사용한다
+  }
+  testConf1(group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0')
+}
+
+task showDeps << {
+  // 버전 경합은 모두 해결되며 빌드에 성공한다
+  configurations.testConf1.each {
+    println it.absolutePath
+  }
+}
+

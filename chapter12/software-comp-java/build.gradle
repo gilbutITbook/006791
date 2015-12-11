@@ -1,0 +1,24 @@
+apply plugin: "java"
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  runtime "org.apache.commons:commons-lang3:3.3.1"
+}
+
+task showSoftwareComponent << {
+  // 소프트웨어 컴포넌트 'java'의 정보 출력
+
+  println "---Artifacts---"
+  for (a in components.java.usages.artifacts) {
+    println a.file //-> <프로젝트>/build/libs/<프로젝트명>.jar
+  }
+
+  println "---Dependencies---"
+  for (d in components.java.usages.dependencies) {
+    println d //-> "org.apache.commons:commons-lang3:3.3.1" 관련 정보
+  }
+}
+

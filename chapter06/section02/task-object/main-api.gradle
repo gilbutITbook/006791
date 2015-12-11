@@ -1,0 +1,13 @@
+task myActionTask {
+    doFirst {
+        println 'First!'
+    }
+}
+
+myActionTask.doLast {
+    println 'Last!'
+}
+
+myActionTask << { println 'Last by leftShift!' }
+
+myActionTask.deleteAllActions()

@@ -1,0 +1,5 @@
+FileCollection collections = files('file1.txt', 'file2.txt', new URL('file:/index.html'))
+FileCollection textFiles = collections.filter { collectionFile ->
+	collectionFile.name.endsWith '.txt'
+}
+assert textFiles.files.size() == 2

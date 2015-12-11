@@ -1,0 +1,11 @@
+copy {
+    into 'replication'
+    exclude '**/dummy.txt'
+
+    from('original') {
+        exclude 'sub1/', 'sub2/'
+    }
+    into('internal') {
+        from 'original/sub1', 'original/sub2'
+    }
+}

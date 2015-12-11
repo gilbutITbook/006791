@@ -1,0 +1,22 @@
+task specialTask << {
+    println '특별한 처리를 실행합니다'
+}
+
+specialTask.onlyIf {
+    buildType == 'partial-build'
+}
+
+
+task skippedIfExceptionOccurred << {
+    println 'start'
+}
+
+skippedIfExceptionOccurred << {
+    if(process == 'error') {
+        throw new StopExecutionException()
+    }
+}
+
+skippedIfExceptionOccurred << {
+    println 'end'
+}

@@ -1,0 +1,12 @@
+task before << {
+     println '먼저 실행한다'
+}
+  
+task after << {
+    println '나중에 실행한다'
+}
+
+after.shouldRunAfter before
+
+// OK
+//before.dependsOn after

@@ -1,0 +1,10 @@
+FileTree sourceFiles = fileTree('src')
+sourceFiles.each { println it.name }
+
+println '-- include *.java --'
+FileTree javaFiles = sourceFiles.include '**/*.java'
+javaFiles.each { println it.name }
+
+println '-- exclude Something.java --'
+FileTree excluded = javaFiles.exclude('**/Something.java')
+excluded.each { println it.name }

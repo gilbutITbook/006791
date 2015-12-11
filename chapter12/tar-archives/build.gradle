@@ -1,0 +1,15 @@
+task docsTar(type: Tar) {
+  baseName = "project-docs"
+  compression = Compression.BZIP2 // 압축 방식 설정
+
+  // 압축 구성
+  into ("docs") {
+    from (zipTree("src/dist/embedded.zip")) {
+      include "**/*.html", "**/*.css", "**/*.js"
+    }
+    from ("src/dist") {
+      include "**/*.html", "**/*.css", "**/*.js"
+    }
+  }
+}
+

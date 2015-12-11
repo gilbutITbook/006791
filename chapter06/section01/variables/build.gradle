@@ -1,0 +1,24 @@
+
+import java.sql.Timestamp
+
+def date = new Date()
+println date
+
+Timestamp ts = new Timestamp(date.getTime())
+println ts
+
+  def scriptScope = 'SCRIPT'
+
+  task getMessage() << {
+    def taskScope = 'TASK'
+    if(message) {
+      println scriptScope + ':' + taskScope + ':' + message
+    } else {
+      def localScope = 'LOCAL'
+      println scriptScope + ':' + taskScope + ':' + localScope
+    }
+  }
+
+  println scriptScope
+//  println taskScope   // 범위 밖
+//  println localScope  // 범위 밖

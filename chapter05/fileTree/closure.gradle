@@ -1,0 +1,5 @@
+FileTree tree = fileTree('src') {
+    include '**/*.java'
+    exclude '**/Something.java'
+}
+tree.each { println it.name }

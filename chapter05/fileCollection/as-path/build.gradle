@@ -1,0 +1,4 @@
+FileCollection libraries = files('lib1.jar', 'lib2.jar')
+// getAsPath()의 Groovy 간략 기법
+String librariesPath = libraries.asPath
+println librariesPath

@@ -1,0 +1,13 @@
+configurations {
+  archives
+}
+
+task docsZip(type: Zip) {
+  baseName "project-doc-${docsVersion}"
+  from "docs"
+}
+
+artifacts {
+  archives docsZip
+}
+

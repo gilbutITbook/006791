@@ -1,0 +1,11 @@
+task docsZip(type: Zip) {
+  // <프로젝트 디렉터리>/build/docs-jdk15.zip 로 생성
+  destinationDir = file("build")
+  appendix = "docs"
+  classifier = "jdk15"
+
+  from ("src/dist") {
+    include "**/*.html", "**/*.css", "**/*.js"
+  }
+}
+

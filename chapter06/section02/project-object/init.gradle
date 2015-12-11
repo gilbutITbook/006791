@@ -1,0 +1,8 @@
+gradle.allprojects { project ->
+    project.beforeEvaluate {
+        println project.name + '프로젝트를 평가한다.'
+    }
+    project.afterEvaluate {
+        println project.name + '프로젝트를 평가했다.'
+    }
+}

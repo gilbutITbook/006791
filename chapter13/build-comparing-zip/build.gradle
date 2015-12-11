@@ -1,0 +1,18 @@
+// 빌드 비교 플러그인 적용
+apply plugin: 'compare-gradle-builds'
+
+compareGradleBuilds { // 빌드 비교 플러그인 설정 블록
+  sourceBuild { // 비교 원본 빌드(소스 빌드)
+    projectDir = "source-build" // 빌드의 루트 디렉터리
+    gradleVersion = "1.12"   //빌드에 사용하는 그래들 버전
+    tasks = ["docsZip"] // 빌드로 실행하는 태스크
+    arguments = ["-PdocsVersion=0.2"] // 빌드 시의 커맨드라인 인수
+  }
+  targetBuild { // 비교 대상 빌드
+    projectDir = "source-build" // 빌드의 루트 디렉터리
+    gradleVersion = "2.0"    // 빌드에 사용하는 그래들 버전
+    tasks = ["docsZip"] // 빌드로 실행하는 태스크
+    arguments = ["-PdocsVersion=0.2"] // 빌드 시의 커맨드라인 인수
+  }
+}
+

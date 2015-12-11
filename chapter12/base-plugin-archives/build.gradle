@@ -1,0 +1,17 @@
+// base-plugin-archives/build.gradle
+
+version = 1.0
+
+apply plugin: "base"
+
+task docsZip(type: Zip) {
+ // ...
+}
+
+task printArchiveInfo << {
+  println docsZip.destinationDir
+  println docsZip.baseName
+  println docsZip.version
+  println docsZip.archivePath
+}
+

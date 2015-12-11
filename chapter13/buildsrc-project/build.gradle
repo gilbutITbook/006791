@@ -1,0 +1,10 @@
+// build.gradle
+task run << {
+  final greeting = new Greeting(content: "Hello")
+  printGreeting(greeting)
+}
+
+void printGreeting(Greeting greeting) {
+  println "Greeting: $greeting.content"
+}
+

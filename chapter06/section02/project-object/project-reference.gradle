@@ -1,0 +1,9 @@
+def childInstance = project(':child')
+childInstance.description = '자식 프로젝트의 설명을 설정한다.'
+
+// 오버로드 메서드의 경우
+/*
+project(':child') {
+    description = '자식 프로젝트의 설명을 설정한다.'
+}
+*/

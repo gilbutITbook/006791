@@ -1,0 +1,53 @@
+// 공통 설정
+subprojects {
+    apply plugin: 'java'
+  
+    def defaultEncoding = 'UTF-8'
+    compileJava.options.encoding = defaultEncoding
+  
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
+  
+    javadoc {
+      options.links << 'http://docs.oracle.com/javase/jp/7/api/'
+    }
+
+    task commonTask << {
+      println project.name + '의' + name + '태스크입니다.' 
+    }
+}
+  
+  
+// 라이브러리 프로젝트
+project('arithmetic-lib') {
+    task limitedTask << {
+      println project.name + '전용 태스크입니다.'
+    }
+}
+  
+  
+// 애플리케이션 프로젝트
+project('arithmetic-main') {
+    apply plugin: 'application'
+  
+    mainClassName = 'com.example.cli.SimpleCalc'
+    applicationName = 'SimpleCalc'
+  
+    dependencies {
+      compile project(':arithmetic-lib')
+    }
+  
+    run {
+      standardInput = System.in
+    }
+
+    commonTask {
+        doFirst {
+            println '=' * 20 + " ${name} start " + '=' * 20
+        }
+        doLast {
+            println '=' * 20 + " ${name}  end  " + '=' * 20
+        }
+        dependsOn ':arithmetic-lib:limitedTask'
+    }
+}

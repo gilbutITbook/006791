@@ -1,0 +1,2 @@
+println rootDir
+println rootProject.name

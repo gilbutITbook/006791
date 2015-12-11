@@ -1,0 +1,25 @@
+// build.gradle 부모 프로젝트
+
+ext {
+  prop1 = "root prop" // 부모 프로젝트의 속성
+}
+project(":child1") { // 자식 프로젝트 child1에 주입
+  ext {
+    prop3 = "injected child prop" // 속성 주입
+  }
+  task injectedTask << { // 태스크 주입
+    println "from a injected task"
+    // 자식 프로젝트 child1의 속성, 부모 프로젝트로부터 상속된 메소드 호출
+    printProp(prop2)
+  }
+}
+
+task run << {
+  println "from a root task"
+  printProp(prop1)
+}
+
+void printProp(String prop) {
+  println "Prop: $prop"
+}
+

@@ -1,0 +1,7 @@
+def instances = ['AppServer': '192.0.2.10', 'DBServer': '192.0.2.20', 'MailServer': '192.0.2.30']
+
+instances.each { serverType, ipAddress ->
+    task "show${serverType}" << {
+        println ipAddress
+    }
+}

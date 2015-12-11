@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<web-app>
+    <servlet>
+        <servlet-name>hello</servlet-name>
+        <servlet-class>com.example.HelloServlet</servlet-class>
+    </servlet>
+</web-app>

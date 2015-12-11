@@ -1,0 +1,7 @@
+task hello << {
+    println 'Hello Gradle world!'
+}
+
+// API 형식
+//def helloTask = task('hello')
+//helloTask << { println 'Hello Gradle world!' }

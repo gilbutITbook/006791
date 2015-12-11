@@ -1,0 +1,13 @@
+configurations {
+  archives
+}
+
+task docsTar(type: Tar) {
+  baseName "project-doc-${docsVersion}"
+  from "docs"
+}
+
+artifacts {
+  archives docsTar
+}
+

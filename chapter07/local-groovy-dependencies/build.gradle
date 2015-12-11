@@ -1,0 +1,14 @@
+configurations {
+  conf1
+}
+
+dependencies {
+  conf1 localGroovy()
+}
+
+task showDeps << {
+  configurations.conf1.each {
+    println it.absolutePath
+  }
+}
+

@@ -1,0 +1,6 @@
+// build.gradle
+apply from: "${profile}.gradle"
+task run << {
+    println serverUrl
+}
+

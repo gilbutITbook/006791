@@ -1,0 +1,21 @@
+// ExtraPropertiesExtension
+project.ext.set('property', 'ext에 추가한 속성이다.')
+
+if(project.ext.has('property')) {
+    println '확장 속성의 값: ' + project.ext.get('property')
+}
+
+// Groovy 속성 참조
+project.ext.property = 'ext에 추가한 속성이다.。'
+println '확장 속성의 값: ' + project.property
+
+// Map 리터럴 형식
+project.ext['property'] = 'ext에 추가한 속성이다.'
+println '확장 속성의 값: ' + project.ext['property']
+
+// 클로저를 사용한 설정
+project.ext {
+    prop1 = 'aaa'
+    prop2 = 'bbb'
+}
+println project.ext.prop1 + project.ext.prop2

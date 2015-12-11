@@ -1,0 +1,23 @@
+task myCopy(type: Copy) {
+    from 'original'
+    into 'target'
+}
+
+task myCopyExtension(type: Copy) {
+    from 'original'
+    into 'target'
+
+    File newFile = file('original/newFile.txt')
+    doFirst {
+      println '복사 대상 파일에 내용을 기록합니다.'
+      newFile.write('복사용 파일입니다.','UTF-8')
+    }
+    doLast {
+      File copied = file('original/newFile_copied.txt')
+      if(newFile.renameTo(copied)) {
+        println '복사를 완료했습니다.'
+      } else {
+        println '복사에 실패했습니다.'
+      }
+    }
+}

@@ -1,0 +1,22 @@
+<project name="sample-ant-project" default="jar" basedir=".">
+    <description>
+         Java 코드를 컴파일해서 JAR 파일을 생성한다。
+    </description>
+
+    <!-- Ant 측 프로젝트 속성  -->
+    <property name="version" value="0.1" />
+    <property name="src" location="src" />
+    <property name="build" location="build" />
+    <property name="dist"  location="dist" />
+
+    <target name="compile" description="코드 파일을 컴파일">
+        <mkdir dir="${build}" />
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false" />
+    </target>
+
+    <target name="jar" depends="compile" description="jar 파일 생성">
+        <mkdir dir="${dist}/lib" />
+        <jar jarfile="${dist}/lib/${ant.project.name}-${version}.jar" basedir="${build}" />
+    </target>
+</project>
+

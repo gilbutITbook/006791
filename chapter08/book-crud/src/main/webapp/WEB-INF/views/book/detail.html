@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{title.application} + ' | ' + #{title.detail}">Example Application | Book Detail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    
+    <div>
+      <h2 th:text="#{header.detail}">Book Information</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th th:text="#{book.id}">ID</th>
+            <th th:text="#{book.title}">Title</th>
+            <th th:text="#{book.isbn}">ISBN</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td th:text="${book.id}"></td>
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.isbn}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr />
+    <div>
+      <a th:href="@{'editView/' + ${book.id}}" th:text="#{link.toEdit}">Edit Book Information</a>
+      <a th:href="@{/}" th:text="#{link.backToList}">Back to Book List</a>
+    </div>
+  </body>
+</html>

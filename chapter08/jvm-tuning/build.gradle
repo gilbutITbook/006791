@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+test {
+	minHeapSize = '1g'
+	maxHeapSize = '1g'
+	jvmArgs '-XX:+UseG1GC'
+}
+
+task testForHeapEater(type: Test) {
+	filter {
+    	includeTestsMatching '*UsingHugeHeapTest'
+	}
+	minHeapSize = '1g'
+	maxHeapSize = '1g'
+}

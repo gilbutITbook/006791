@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="com.example" module="aaa" revision="0.1" />
+  <configurations>
+    <conf name="default" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="aaa" type="jar" conf="default" ext="jar"/>
+  </publications>
+</ivy-module>

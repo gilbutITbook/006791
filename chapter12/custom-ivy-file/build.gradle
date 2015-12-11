@@ -1,0 +1,41 @@
+apply plugin: "java"
+apply plugin: "ivy-publish"
+
+group = "com.example"
+version = 0.1
+
+// ...
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  runtime "org.apache.commons:commons-lang3:3.3.1"
+}
+
+publishing { // 공개 설정
+  publications {
+    mod1(IvyPublication) {
+      from components.java
+      module = "my-maven-mod1" // 미지정인 경우는 project.name 이 사용된다
+      organisation = "com.example.maven" // 미지정인 경우는 project.group이 사용된다
+      revision = "0.1-a" // 미지정인 경우는 project.version이 사용된다
+
+      descriptor.withXml { xml ->
+        final infoNode = xml.asNode().info[0]
+        final licenseNode = {
+          license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+          }
+        }
+        licenseNode.resolveStrategy = Closure.DELEGATE_FIRST
+
+        infoNode.appendNode("description", "샘플 프로젝트 버전 $version")
+        infoNode.description + licenseNode
+      }
+    }
+  }
+}
+

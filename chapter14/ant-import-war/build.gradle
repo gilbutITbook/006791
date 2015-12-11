@@ -1,0 +1,21 @@
+version = "1.1"
+
+ant.importBuild "build.xml"
+
+task war(type: War, dependsOn: "jar") { // build.xml의 jar 타깃 참조
+    description = "war 파일을 작성"
+
+    baseName = "ant-sample" // war 파일 이름
+    version = project.version // 파일명에 추가되는 버전
+
+    destinationDir = file("dist")// war 파일 출력 위치
+
+    // war 파일 구성
+    from("web") {
+        include("index.html")
+    }
+    classpath("dist/lib/sample-ant-project-0.1.jar")
+    webInf {
+        from ("web/WEB-INF")
+    }
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{title.application} + ' | ' + #{title.edit}">Example Application | Edit Book Information</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <h2 th:text="#{header.edit}">Edit Book Information</h2>
+    <fieldset>
+      <form action="#" th:action="@{/book/update}" th:object="${book}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+          <table border="1">
+            <thead>
+              <tr>
+                <th th:text="#{book.title}">Title</th>
+                <th th:text="#{book.isbn}">ISBN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" th:field="*{title}" th:errorclass="fieldError" /></td>
+                <td><input type="text" th:field="*{isbn}" th:errorclass="fieldError" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p />
+        <div class="submit">
+          <button type="submit" name="update" th:text="#{button.update}">Update Book</button>
+        </div>
+      </form>
+    </fieldset>
+    <hr />
+    <div>
+      <a th:href="@{'../' + ${book.id}}" th:text="#{link.backToDetail}">Back to Book Information</a>
+      <a th:href="@{/}" th:text="#{link.backToList}">Back to Book List</a>
+    </div>
+  </body>
+</html>

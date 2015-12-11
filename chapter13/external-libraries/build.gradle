@@ -1,0 +1,16 @@
+// build.gradle
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath "org.apache.commons:commons-lang3:3.3.1"
+  }
+}
+
+import org.apache.commons.lang3.StringUtils
+
+task run << {
+  println StringUtils.removeEnd("http://www.gradle.org/", "/")
+}
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ivy-module version="2.0">
+  <info organisation="com.example.maven" module="my-maven-mod1" revision="0.1-a" status="integration" publication="20140629164225">
+    <description>サンプルプロジェクト バージョン0.1</description>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </info>
+  <configurations>
+    <conf name="default" visibility="public" extends="runtime"/>
+    <conf name="runtime" visibility="public"/>
+  </configurations>
+  <publications>
+    <artifact name="my-maven-mod1" type="jar" ext="jar" conf="runtime"/>
+  </publications>
+  <dependencies>
+    <dependency org="org.apache.commons" name="commons-lang3" rev="3.3.1" conf="runtime-&gt;default"/>
+  </dependencies>
+</ivy-module>

@@ -1,0 +1,26 @@
+// yoreyore/build.gradle
+
+repositories {
+   ivy {
+     url "http://localhost:8000"
+     layout 'pattern' , {
+       artifact '[organisation]/[module]/[artifact]-[revision](.[ext])'
+       ivy '[organisation]/[module]/ivy.xml'
+     }
+   }
+}
+
+configurations {
+  compile
+}
+
+dependencies {
+  compile group: 'geregere', name: 'geregere', version: '0.1'
+}
+
+task showDeps << {
+  configurations.compile.each {
+    println it.absolutePath
+  }
+}
+

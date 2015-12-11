@@ -1,0 +1,10 @@
+// 기본 제외 설정에서 삭제한다
+org.apache.tools.ant.DirectoryScanner.removeDefaultExclude("**/.gitignore")
+
+task projectZip(type: Zip) {
+  // 프로젝트 디렉터리를 압축한다
+  from (".")
+  include "**/.gitignore", "**/*.java", "**/*.html"
+  exclude ".gradle"
+}
+

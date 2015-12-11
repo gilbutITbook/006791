@@ -1,0 +1,9 @@
+FileCollection tempCollection = files('file1.txt')
+File file1 = tempCollection.singleFile
+
+// ファイルコレクションが空でなく、'file1.txt'が含まれていたらファイルを削除する。
+if(!tempCollection.isEmpty() && tempCollection.contains(file1)) {
+    tempCollection -= files(file1) 
+}
+// 空だったら、StopExecutionException をスローする。
+tempCollection.stopExecutionIfEmpty()

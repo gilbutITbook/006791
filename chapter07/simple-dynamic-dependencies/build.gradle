@@ -1,0 +1,28 @@
+configurations {
+  conf1
+}
+
+repositories {
+  mavenCentral()
+  maven {
+      url "http://repository.apache.org/content/groups/snapshots"
+  }
+}
+
+// conf1 컨피겨레이션의 동적 버전 캐시 간격 설정
+configurations.conf1.resolutionStrategy.cacheDynamicVersionsFor 1, 'minutes'
+// conf1 컨피겨레이션의 변경성 모듈 캐시 간격 설정
+configurations.conf1.resolutionStrategy.cacheChangingModulesFor 5, 'hours'
+
+dependencies {
+  conf1 'org.slf4j:slf4j-api:1.7.+' // 1.7 대 버전 중 최신 버전
+  conf1 'commons-cli:commons-cli:latest.integration' // 불안정 버전도 포함해서 최신 버전 취득
+  conf1 'junit:junit:latest.release' // 안전화 버전의 최신판 취득
+}
+
+task showDeps << {
+  configurations.conf1.each {
+    println it.absolutePath
+  }
+}
+

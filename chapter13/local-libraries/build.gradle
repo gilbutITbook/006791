@@ -1,0 +1,20 @@
+// build.gradle
+buildscript {
+  repositories {
+    flatDir dir: "lib" // lib/mycompany-gradle-tasks-1.0.jar에 라이브러리 배치
+  }
+  dependencies {
+    classpath "com.example:mycompany-gradle-tasks:1.0"
+  }
+}
+
+apply plugin: "war"
+
+import com.example.mycompany.gradle.tasks.Deploy
+
+task deploy(type: Deploy) {
+  description = "사용자 정의 태스크로 War를 배포한다"
+
+  url "http://mycompany-server.example.com"
+}
+

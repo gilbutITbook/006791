@@ -1,0 +1,29 @@
+version = 1.0
+
+task myWar(type: War) {
+    // 태스크 설정(파일 생성 위치 등)
+    baseName = "my-war"
+    destinationDir = file("build")
+
+    // 압축 구성
+    from("webapp") {
+      include "**/*.html", "**/*.js", "**/*.css"
+    }
+    // 라이브러리 JAR 설정
+    classpath fileTree("lib")
+    // WEB-INF 구성
+    webInf {
+      into("classes") {
+        from ("out") {
+          include "**/*.class"
+        }
+      }
+    }
+
+    webXml file("web.xml")
+
+    manifest {
+     attributes("Built-By": "Gradle", "Implementation-Version": project.version)
+   }
+}
+

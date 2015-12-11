@@ -1,0 +1,6 @@
+logger.error '에러 메시지'
+logger.quiet '중요 메시지'
+logger.warn '경고 메시지'
+logger.lifecycle '빌드 진행 상황을 보여주는 메시지'
+logger.info '정보 메시지'
+logger.debug '디버그 메시지'

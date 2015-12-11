@@ -1,0 +1,18 @@
+configurations {
+  conf1
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  conf1 group: 'org.slf4j', name: 'slf4j-api', version: '1.7.5'
+}
+
+task showDeps << {
+  configurations.conf1.each {
+    println it.absolutePath
+  }
+}
+

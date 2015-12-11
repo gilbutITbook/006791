@@ -1,0 +1,6 @@
+rootProject.name = 'simple-parent'
+include ':simple-jar'
+include ':simple-webapp'
+
+project(':simple-jar').projectDir = "$rootDir/simple-jar" as File
+project(':simple-webapp').projectDir = "$rootDir/simple-webapp" as File

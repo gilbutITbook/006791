@@ -1,0 +1,12 @@
+FileTree tree = fileTree('src')
+tree.visit(new FileVisitor() {
+    void visitDir(FileVisitDetails fileDetails) {
+      println 'name: ' + fileDetails.getName()
+      println 'path: ' + fileDetails.getPath()
+    }
+
+    void visitFile(FileVisitDetails fileDetails) {
+      println 'name: ' + fileDetails.getName()
+      println 'file size: ' + fileDetails.getSize()
+    }
+})

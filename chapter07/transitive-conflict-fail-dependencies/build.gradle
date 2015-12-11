@@ -1,0 +1,27 @@
+repositories {
+  mavenCentral()
+}
+
+configurations {
+  conf1
+  testConf1.extendsFrom conf1 // testConf1는 conf의 의존 관계도 포함
+}
+
+configurations.testConf1 {
+  resolutionStrategy {
+    failOnVersionConflict()  // Fail 전략 채택
+  }
+}
+
+dependencies {
+  conf1 group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.1'
+  testConf1 group: 'org.spockframework', name: 'spock-core', version: '0.7-groovy-2.0'
+}
+
+task showDeps << {
+  // A conflict was found between the following modules.. 라는 메시지와 함께 빌드되지 않는다
+  configurations.testConf1.each {
+    println it.absolutePath
+  }
+}
+

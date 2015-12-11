@@ -1,0 +1,43 @@
+apply plugin: "java"
+apply plugin: "maven-publish" // Maven Publish 플러그인 적용
+
+//..
+
+group = "com.example"
+version = 0.1
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  runtime "org.apache.commons:commons-lang3:3.3.1"
+}
+
+task sourceJar(type: Jar) {
+  from sourceSets.main.allJava // 소스 세트를 입력 파일로 지정
+}
+
+publishing { // 공개 설정
+  publications {
+    mod1(MavenPublication) { // <mod1>는 임의의 모듈 식별명
+      from components.java // 소프트웨어 컴포넌트 'java'를 공개 대상으로 지정
+      // artifact() 메서드로 공개할 압축 파일이나 파일을 지정
+      artifact sourceJar {
+        classifier "sources"
+      }
+    }
+  }
+
+  repositories {
+    maven {
+      name "local1" // 리포지토리명. 생략한 경우는 'maven'」
+      url "build/repo1" // 디렉터리 지정
+    }
+    maven {
+      name "remote1" // 리포지토리명. 생략한 경우는 ''maven'」
+      url "http://localhost:8081/artifactory/repo1" // 리포지토리의 URL
+    }
+  }
+}
+

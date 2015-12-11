@@ -1,0 +1,4 @@
+task myTask(type: DefaultTask) << {
+    println "Hello, world!"
+}
+

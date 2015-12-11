@@ -1,0 +1,17 @@
+apply plugin: "java"
+apply plugin: "compare-gradle-builds"
+
+// 중략
+
+apply plugin: "application"
+
+version = 1.0
+
+mainClassName = "com.example.Hello"
+
+compareGradleBuilds {
+  targetBuild {
+    gradleVersion "2.0"
+  }
+}
+

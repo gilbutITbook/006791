@@ -1,0 +1,17 @@
+// geregere/build.gradle
+
+group = "geregere"
+version = 0.1
+
+configurations {
+    conf1
+    conf2
+}
+
+dependencies {
+  conf1 group: 'com.example', name: 'aaa', version: '0.1'
+  conf2 group: 'com.example', name: 'bbb', version: '0.1'
+}
+
+// ...
+

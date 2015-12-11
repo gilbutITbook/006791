@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title th:text="#{title.application} + ' | ' + #{title.create}">Example Application | Register new Book</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  </head>
+
+  <body>
+    <h2 th:text="#{header.create}">Register new Book</h2>
+    <fieldset>
+      <form action="#" th:action="@{/book/register}" th:object="${book}" method="post">
+        <div>
+          <table border="1">
+            <thead>
+              <tr>
+                <th th:text="#{book.title}">Title</th>
+                <th th:text="#{book.isbn}">ISBN</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="text" th:field="*{title}" th:errorclass="fieldError" /></td>
+                <td><input type="text" th:field="*{isbn}" th:errorclass="fieldError" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+        <div class="submit">
+          <button type="submit" name="save" th:text="#{button.create}">Add Book</button>    
+        </div>
+      </form>
+    </fieldset>
+    <hr />
+    <div>
+      <a th:href="@{/}" th:text="#{link.backToList}">Back to Book List</a>
+    </div>
+  </body>
+</html>

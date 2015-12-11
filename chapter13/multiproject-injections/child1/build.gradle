@@ -1,0 +1,13 @@
+// child1/build.gradle 자식 프로젝트
+ext {
+  prop2 = "child prop1"
+}
+
+// 부모 프로젝트에서 주입된 태스크를 참조
+task run(dependsOn: "injectedTask") << {
+  println "from a child task"
+  // 부모 프로젝트에서 상속된 메서드, 속성 호출
+  printProp(prop1)
+  // 부모 프로젝트에서 주입된 속성 호출
+  printProp(prop3)
+}

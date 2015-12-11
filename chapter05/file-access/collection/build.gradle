@@ -1,0 +1,2 @@
+def collections = files('f1.txt', 'f2.txt')
+println collections.asPath

@@ -1,0 +1,29 @@
+File mainJava = file('src/main/java/Main.java')
+println mainJava.absolutePath
+
+File dummyFile = file(new File('src/dummy.txt'))
+println dummyFile.path
+
+
+File index = null
+
+URL url = new URL('file:/index.html')
+index = file(url)
+println index.path
+
+URI uri = new URI('file:/index.html')
+index = file(uri)
+println index.path
+
+
+import java.util.concurrent.Callable
+
+index = file(new Callable<String>() {
+    String call() {
+        '/index.html'
+    }
+})
+println index.path
+
+index = file { '/index.html' }
+println index.path
