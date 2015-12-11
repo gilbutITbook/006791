@@ -55,7 +55,7 @@ JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변�
 
 * 통합 테스트를 하려면
     
-    targetCompatibility = 1.8gradle -Penv=integration integrationTest
+ gradle -Penv=integration integrationTest
 
 * 시스템 테스트를 하려면(※)
     
