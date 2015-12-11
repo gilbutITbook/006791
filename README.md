@@ -20,9 +20,9 @@
 예제 코드는 JDK 7을 전제로 작성했습니다.
 JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변경해야 합니다(legacy-prj제외).
 
-  //JDK8용 설정
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+    // JDK 8용 설정
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
 
 # [5장]
@@ -40,11 +40,9 @@ JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변�
 예제 코드는 JDK 7을 기반으로 작성했습니다.
 JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변경해야 합니다(book-crud 제외)。
 
-  //JDK8용 설정
-  
-  sourceCompatibility = 1.8
-  
-  targetCompatibility = 1.8
+    // JDK 8용 설정
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
 * book-crud 프로젝트에 대해서
 
@@ -52,13 +50,16 @@ JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변�
 　JDK7, Gradle2.0 이상, Firefox 33.0
 
 * 단위 테스트를 하려면
-　gradle -b unit-build.gradle test
+    
+   gradle -b unit-build.gradle test
 
 * 통합 테스트를 하려면
-  gradle -Penv=integration integrationTest
+    
+    targetCompatibility = 1.8gradle -Penv=integration integrationTest
 
 * 시스템 테스트를 하려면(※)
-　gradle -Penv=functional functionalTest
+    
+  gradle -Penv=functional functionalTest
 
     (※) 테스트 종료 후에 Tomcat에서 예외가 발생할 수 있지만 테스트는 정상적으로 실시됩니다.
          이 예외는 Tomcat 플러그인의 문제로 수정하려면 build.gradle 를 다음과 같이 변경하면 됩니다.
