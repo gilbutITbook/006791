@@ -44,10 +44,9 @@ JDK 8에서 실행하려면 빌드 스크립트 설정을 다음과 같이 변�
   sourceCompatibility = 1.8
   targetCompatibility = 1.8
 
-* book-crud 프로젝트에 대해서
-　이 예제 코드는 다음 버전에서 동작합니다. JDK8에선 동작하지 않으니 주의하세요.
-　JDK7, Gradle2.0 이상
-  Firefox 33.0
+* book-crud 프로젝트에 대해서.
+　이 예제 코드는 다음 버전에서 동작합니다. JDK8에서는 동작하지 않으니 주의하세요.
+　JDK7, Gradle2.0 이상, Firefox 33.0
 
 * 단위 테스트를 하려면
 　gradle -b unit-build.gradle test
